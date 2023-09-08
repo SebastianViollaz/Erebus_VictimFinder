@@ -30,7 +30,8 @@ import time
 import numpy as np
 import cv2 as cv
 
-class Executor:
+class Executor():
+    
     def __init__(self, mapper: Mapper, robot: Robot) -> None:
         self.agent = Agent(mapper)
         self.mapper = mapper # Maps everything

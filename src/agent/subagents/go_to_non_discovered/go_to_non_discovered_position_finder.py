@@ -66,7 +66,7 @@ class PositionFinder(PositionFinderInterface):
             return self.mapper.pixel_grid.array_index_to_grid_index(closest_unseen_array_indexes[0])
         
         else:
-            print("Ain't found no nothin'")
+            print("found nothing")
             return None
 
 

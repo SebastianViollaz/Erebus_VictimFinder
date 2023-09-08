@@ -26,7 +26,7 @@ class StateMachine:
     def change_state(self, new_state):
         """Sets the state the specified value."""
         if new_state not in self.possible_states:
-            raise ValueError("Can't change state. New state doesn't exist.")
+            raise ValueError("Can not change state. New state does not exist.")
         
         if new_state in self.allowed_state_changes[self.state]:
             self.change_state_function()
@@ -35,7 +35,7 @@ class StateMachine:
             print("changed to state", new_state)
 
         else:
-            print(f"WARNING: Can't change to state {new_state}. New state is not in the possible changes for {self.state}.")
+            print(f"WARNING: Can not change to state {new_state}. New state is not in the possible changes for {self.state}.")
         return True
 
     def check_state(self, state):
