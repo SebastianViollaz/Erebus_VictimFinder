@@ -120,7 +120,6 @@ class FixtureDetector:
         contours, _ = cv.findContours(image_sum, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
         
-        
         final_victims = []
         for c in contours:
             x, y, w, h = cv.boundingRect(c)

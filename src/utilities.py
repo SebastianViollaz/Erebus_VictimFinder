@@ -2,7 +2,6 @@ import math
 import cv2 as cv
 import numpy as np
 import os
-from functools import wraps
 from fixture_detection.color_filter import ColorFilter
 
 script_dir = os.path.dirname(__file__)
@@ -18,26 +17,31 @@ def normalizeRads(rad):
         rad += 2 + math.pi
     return rad
 
-# Converts from degrees to radians
 def degsToRads(deg):
+    """Converts from degrees to radians
+    """
     return deg * math.pi / 180
 
-# Converts from radians to degrees
 def radsToDegs(rad):
+    """ Converts from radians to degrees
+    """
     return rad * 180 / math.pi
 
-# Converts a number from a range of value to another
 def mapVals(val, in_min, in_max, out_min, out_max):
+    """Converts a number from a range of value to another
+    """
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
-# Gets x, y coordinates from a given angle in radians and distance
 def getCoordsFromRads(rad, distance):
+    """# Gets x, y coordinates from a given angle in radians and distance
+    """
     y = float(distance * math.cos(rad))
     x = float(distance * math.sin(rad))
     return (x, y)
 
-# Gets x, y coordinates from a given angle in degrees and distance
 def getCoordsFromDegs(deg, distance):
+    """# Gets x, y coordinates from a given angle in degrees and distance
+    """
     rad = degsToRads(deg)
     y = float(distance * math.cos(rad))
     x = float(distance * math.sin(rad))
@@ -45,28 +49,21 @@ def getCoordsFromDegs(deg, distance):
 
 
 def multiplyLists(list1, list2):
-    finalList = []
-    for item1, item2 in zip(list1, list2):
-        finalList.append(item1 * item2)
-    return finalList
+    """MUltiply a list elemnt to elemnt"""
+    return [item1 * item2 for item1, item2 in zip(list1, list2)]
 
 def sumLists(list1, list2):
-    finalList = []
-    for item1, item2 in zip(list1, list2):
-        finalList.append(item1 + item2)
-    return finalList
+    """Sum lists element to element"""
+    return [item1 + item2 for item1, item2 in zip(list1, list2)]
 
-def substractLists(list1, list2):
-    finalList = []
-    for item1, item2 in zip(list1, list2):
-        finalList.append(item1 - item2)
-    return finalList
+def subtractLists(list1, list2):
+    """Substract lists element to element"""
+    return [item1 - item2 for item1, item2 in zip(list1, list2)]
+
 
 def divideLists(list1, list2):
-    finalList = []
-    for item1, item2 in zip(list1, list2):
-        finalList.append(item1 / item2)
-    return finalList
+    """Divide lists element to element"""
+    return [item1 / item2 for item1, item2 in zip(list1, list2)]
 
 
 def draw_grid(image, square_size, offset = [0,0], color=255):
@@ -135,30 +132,17 @@ def get_squares(image, square_size, offsets):
     return grid
 
 def resize_image_to_fixed_size(image, size):
-    if image.shape[0] > size[0]:
-        ratio = size[0] / image.shape[0]
+    """Recice an image depending of a specif size (heigth,width)"""
+    height, width = image.shape[:2]
 
-        width = round(image.shape[1] * ratio)
-        final_image = cv.resize(image.astype(np.uint8), dsize=(width, size[0]))
-    
-    elif image.shape[1] > size[1]:
-        ratio = size[1] / image.shape[1]
+    if width > size[1] or height > size[0]:
+        ratio = min(size[1] / width, size[0] / height)
+        new_width = round(width * ratio)
+        new_height = round(height * ratio)
+        final_image = cv.resize(image, (new_width, new_height), interpolation=cv.INTER_NEAREST)
+    else:
+        final_image = image
 
-        height = round(image.shape[0] * ratio)
-        final_image = cv.resize(image.astype(np.uint8), dsize=(size[1], height))
-    
-    elif image.shape[1] >= image.shape[0]:
-        ratio = size[1] / image.shape[1]
-
-        height = round(image.shape[0] * ratio)
-        final_image = cv.resize(image.astype(np.uint8), dsize=(size[1], height), interpolation=cv.INTER_NEAREST)
-    
-    elif image.shape[0] >= image.shape[1]:
-        ratio = size[0] / image.shape[0]
-
-        width = round(image.shape[1] * ratio)
-        final_image = cv.resize(image.astype(np.uint8), dsize=(width, size[0]), interpolation=cv.INTER_NEAREST)
-    
     return final_image
 
 

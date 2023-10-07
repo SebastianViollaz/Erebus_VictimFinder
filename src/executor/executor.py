@@ -240,10 +240,6 @@ class Executor():
                     self.sequencer.reset_sequence() # Resets the sequence
                     break
                 
-        """
-        if self.stuck_detector.is_stuck():
-            change_state_function("stuck")
-        """
         
         
 

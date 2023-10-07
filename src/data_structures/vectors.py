@@ -4,6 +4,7 @@ import numpy as np
 from data_structures.angle import Angle
 
 class Position2D:
+    """Rewpreset a position in X and Y coordinates"""
     def __init__(self, *args, **kwargs):
         """
         Takes either two values or an iterable with at least two indices.
@@ -93,7 +94,6 @@ class Position2D:
     def __divmod__(self, other):
         return self.__floordiv__(other), self.__mod__(other)
     
-    
     def __rdivmod__(self, other):
         return self.__divmod__(other)
     
@@ -146,13 +146,13 @@ class Position2D:
         result.normalize()
         return result
     
-
     def to_vector(self):
         m = Position2D(0, 0).get_distance_to(self)
         a = Position2D(0, 0).get_angle_to(self)
         return Vector2D(a, m)
        
 class Vector2D:
+    """REpresent a 2d vector """
     def __init__(self, direction:Angle=None, magnitude=None):
         self.direction = direction
         self.magnitude = magnitude

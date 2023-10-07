@@ -2,17 +2,6 @@
 #have to run this script to update the WebotsCOntroller file wich is ment to be load as the controller in Erebus platform.
 
 import os
-# def read_file(file_path):
-#     """Return the contnent of a file as a forated oneline string"""
-#     try:
-#         with open(file_path, 'r') as file:
-#             lines = file.readlines()
-#             modified_content = '\\\n'.join(line.strip() for line in lines)
-#             return modified_content
-#     except FileNotFoundError:
-#         return f"{src_folder}/{file_path} not found"
-#     except Exception as e:
-#         return f"Error reading the file: {str(e)}"
 import black
 
 def read_file(input_file):
@@ -35,7 +24,6 @@ def read_file(input_file):
 
 
 
-ALL_FOLDER_FILES = []
 def check_dir(dir):
     """Add to ALL_FOLDER_FILES all the file's paths that the folder has"""
     contents = os.listdir(dir)
@@ -50,6 +38,7 @@ def check_dir(dir):
             check_dir(f"{dir}/{folder}")
     
 
+ALL_FOLDER_FILES = []
 
 base_code_file = "scripts/basecontroller.txt"
 src_folder = "src"  

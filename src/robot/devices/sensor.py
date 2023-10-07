@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class Sensor(ABC):
     def __init__(self, webots_device, time_step):
@@ -6,6 +6,7 @@ class Sensor(ABC):
         self.device = webots_device
         self.device.enable(time_step)
 
+    #AbstractMethonFor
     def update(self):
         pass
 

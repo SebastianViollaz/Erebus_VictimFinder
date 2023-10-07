@@ -67,6 +67,7 @@ class Camera(TimedSensor):
         return data
     
     def update(self, robot_orientation: Angle):
+        """Update the camera image and their values"""
         super().update()
 
         self.horizontal_orientation = self.horizontal_orientation_in_robot + robot_orientation

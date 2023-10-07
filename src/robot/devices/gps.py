@@ -14,7 +14,7 @@ class Gps(Sensor):
 
     def update(self):
         """
-        Updates gps, must run every timestep.
+        Updates gps values , must run every timestep.
         """
         self.__prev_position = self.position
         self.position = self.get_position()

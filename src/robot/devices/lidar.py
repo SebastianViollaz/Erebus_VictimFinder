@@ -7,8 +7,11 @@ from robot.devices.sensor import TimedSensor
 from data_structures.angle import Angle
 from data_structures.vectors import Vector2D
 
-# Returns a point cloud of the detctions it makes
 class Lidar(TimedSensor):
+    """
+    Lidar Sesor. 
+    Is used to returna  point of cloud that it detects"""
+
     def __init__(self, webots_device, time_step, step_counter, layers_used=range(4)):
         super().__init__(webots_device, time_step, step_counter)
         self.x = 0
@@ -42,14 +45,17 @@ class Lidar(TimedSensor):
         self.__out_of_bounds_point_cloud = None
         self.__distance_detections = None
 
-    # Returns the in-bounds point cloud
     def get_point_cloud(self):
+        """
+        Returns the in-bounds point cloud
+        """
         if self.step_counter.check():
             return self.__point_cloud
     
-    # Returns a point cloud with all the out of bounds detections as points with a fixed distance
-    # to the center.
+    
     def get_out_of_bounds_point_cloud(self):
+        """Returns a point cloud with all the out of bounds detections as points with a fixed distance
+        to the center."""
         if self.step_counter.check():
             return self.__out_of_bounds_point_cloud
         
@@ -62,6 +68,7 @@ class Lidar(TimedSensor):
 
 
     def update(self):
+        """Update sensor values"""
         super().update()
 
         # Do every n steps
@@ -69,8 +76,9 @@ class Lidar(TimedSensor):
             self.__update_point_clouds()
 
 
-    # Create point clouds from detections and check if a point is close
+   
     def __update_point_clouds(self):
+        """ Create point clouds from detections and check if a point is close"""
         self.is_point_close = False
         
         # (degsToRads(359 - radsToDegs(self.rotation)))

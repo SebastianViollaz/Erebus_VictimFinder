@@ -16,7 +16,7 @@ class Gyroscope(Sensor):
 
     def update(self):
         """
-        Do on every timestep.
+        Update sensor values
         """
         time_elapsed = self.time_step / 1000
         sensor_y_value = self.device.getValues()[self.index]
