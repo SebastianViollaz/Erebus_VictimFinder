@@ -4,6 +4,7 @@
 # Our code is free and open-source under the MIT license. We strongly encourage the sharing and distribution of this file and our github repository.
 
 import contextlib as __stickytape_contextlib
+import tarfile, os, io
 
 @__stickytape_contextlib.contextmanager
 def __stickytape_temporary_dir():

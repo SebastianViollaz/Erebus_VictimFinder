@@ -22,7 +22,16 @@ def read_file(input_file):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+import torch
 
+def read_pt_file(pt_filename):
+    try:
+        data = torch.load(pt_filename)
+        return data
+    except Exception as e:
+        # Handle any exceptions that might occur during loading
+        print(f"Error loading .pt file: {str(e)}")
+        return None
 
 def check_dir(dir):
     """Add to ALL_FOLDER_FILES all the file's paths that the folder has"""
@@ -52,12 +61,24 @@ with open("scripts/basecontroller.txt", "r") as base_code:
             insert_modules = True
         elif insert_modules:
             for file in ALL_FOLDER_FILES:
-                file_content=read_file(file).replace('"',"'")
+                ext = file.split(".")[1]
+                print(ext)
+                if ext == "py":
+                    file_content=read_file(file).replace('"',"'")
 
-                path_parts = file.split("/")
-                path_parts.pop(0)
-                new_path = "/".join(path_parts)
-                content += f'    __stickytape_write_module("{new_path}",b"{file_content}")\n'
+
+                    path_parts = file.split("/")
+                    path_parts.pop(0)
+                    new_path = "/".join(path_parts)
+                    content += f'    __stickytape_write_module("{new_path}",b"{file_content}")\n'
+                elif ext == "pt":
+                    file_content=read_pt_file(file)
+
+                    path_parts = file.split("/")
+                    path_parts.pop(0)
+                    new_path = "/".join(path_parts)
+                    content += f'    create_temp_pt_file("{new_path}",b"{file_content}")\n'
+
             insert_modules = False  # Disable module insertion after processing
         else:
             content += line

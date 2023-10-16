@@ -5,9 +5,11 @@ import random
 
 
 from fixture_detection.color_filter import ColorFilter
-
+from fixture_detection import img_recognizer
 class VictimClassifier:
     def __init__(self):
+
+        self.detector = img_recognizer.img_recognizer()
         self.white = 255
 
         self.victim_letter_filter = ColorFilter(lower_hsv=(0, 0, 0), upper_hsv=(0, 0, 130))
@@ -82,6 +84,9 @@ class VictimClassifier:
                 max_size = w*h
         
         return biggest_blob
+    
+    def classify_victim_yolov(self,image):
+        return self.detector.detect(image)
 
     def classify_victim(self, victim):
         letter = self.isolate_victim(victim["image"])

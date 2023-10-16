@@ -25,6 +25,8 @@ class Robot:
     Abstraction layer for the webots robot. In charge of low level movement and sensing.
     """
     def __init__(self, time_step):
+
+        print("This isn´t an error")
         self.time_step = time_step
         self.__start_time = 0
         self.__time = 0
@@ -144,6 +146,9 @@ class Robot:
     
     # Wrapper for cameras
     def get_camera_images(self):
+        """Returns a list of images of the cameras
+        #### [right_cam,center_cam,left_cam]
+        """
         if self.center_camera.step_counter.check():
             return [self.right_camera.get_image(), 
                     self.center_camera.get_image(), 

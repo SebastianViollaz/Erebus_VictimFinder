@@ -1,6 +1,6 @@
-from executor.executor import Executor
-from mapping.mapper import Mapper
-from robot.robot import Robot
+# from executor.executor import Executor
+# # from mapping.mapper import Mapper
+# # from robot.robot import Robot
 
 def main():
     robot = Robot(time_step=32)
@@ -10,4 +10,16 @@ def main():
     executor.run()
 
 
-main()
+## Code for victim's classification using Yolo V8
+
+import requests
+
+def downloadYOLO():
+    r = requests.get(IA_DATASETURL, allow_redirects=True)
+    open('ia.pt', 'wb').write(r.content)
+
+IA_DATASETURL = "https://raw.githubusercontent.com/GUriburuRomero/test/main/MyYoloTeam.pt"
+
+downloadYOLO()
+
+# main()

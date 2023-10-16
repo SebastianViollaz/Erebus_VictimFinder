@@ -228,6 +228,7 @@ class Executor():
         if self.victim_reporting_enabled and cam_images is not None and not self.mapper.has_detected_victim_from_position():
             for cam_image in cam_images:
                 self.robot.lidar.get_detections()
+                self.fixture_detector.getyolo(cam_image.image)
                 fixtures = self.fixture_detector.find_fixtures(cam_image.image)   
                 if len(fixtures):
                     self.letter_to_report = self.fixture_detector.classify_fixture(fixtures[0])

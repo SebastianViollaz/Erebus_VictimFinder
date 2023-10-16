@@ -199,13 +199,18 @@ class FixtureClasiffier:
 
         return color_point_counts
 
+    def getyolo(self,image):
+        print("YOLO IMAGE::")
+        print(self.victim_classifier.classify_victim_yolov(image))
+
     def classify_fixture(self, fixture) -> str:
+
+
         image = cv.resize(fixture["image"], (100, 100), interpolation=cv.INTER_AREA)
 
         color_point_counts = self.count_colors(image)
         
-        if SHOW_FIXTURE_DEBUG:
-            print(color_point_counts)
+        
 
         # Check all filters. Find first color counts that fit.
         final_fixture_filter = None
@@ -231,6 +236,7 @@ class FixtureClasiffier:
             letter = final_fixture_filter.default_letter
 
         if SHOW_FIXTURE_DEBUG:
+            print(color_point_counts)
             print("FIXTURE: ", letter)
 
         return letter

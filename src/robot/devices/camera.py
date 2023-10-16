@@ -45,8 +45,12 @@ class Camera(TimedSensor):
         self.vertical_orientation = Angle(0)
         self.distance_from_center = distance_from_center
 
-    # Returns the camera image
     def get_image(self):
+        """Returns the iamge of the camera
+        ### image atributes
+        #### *image: np.ndarray
+        #### *data: CameraData
+        """
         if self.step_counter.check():
             return self.image
     
